@@ -6,13 +6,13 @@
     <div class="m-header">
       <a href="" class="b-brand text-primary">
         <!-- ========   Change your logo from here   ============ -->
-        <img src="images/1.jpg"  alt="logo"  style="width: 50px; height: 50px; display: block !important;">
+        <img src="images/1.jpg"  alt="logo"  style="width: 70px; height: 70px; display: block !important;">
         </a>
     </div>
     <div class="navbar-content">
       <ul class="pc-navbar">
         <li class="pc-item">
-          <a href="index.html" class="pc-link">
+          <a href="index.php" class="pc-link">
             <span class="pc-micon"><i class="ti ti-dashboard"></i></span>
             <span class="pc-mtext">Dashboard</span>
           </a>

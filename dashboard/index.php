@@ -66,7 +66,7 @@ include('header.php');
                 <h5 class="m-b-10">Home</h5>
               </div>
               <ul class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="index.php">Home</a></li>
                 <li class="breadcrumb-item"><a href="javascript: void(0)">Dashboard</a></li>
                 <li class="breadcrumb-item" aria-current="page">Home</li>
               </ul>
@@ -79,7 +79,7 @@ include('header.php');
       <!-- =============================================================================================== -->
                                         <!-- CRUD TABLE  -->
       <!-- =============================================================================================== -->
-      <table class="table table-bordered">
+      <table style="text-align: center" class="table table-bordered">
       <thead>
         <tr>
           <th >ID</th>
@@ -105,6 +105,11 @@ include('header.php');
           <td>
             <a href="update_profile.php"> <button type="button" class="btn btn-success">UPDATE </button> </a> &nbsp;
             <button type="button" class="btn btn-danger">DELETE </button>
+            <select name="" id="">SELECT
+              <option value="">option</option>
+              <option value="">option</option>
+              <option value="">option</option>
+            </select>
           </td>
         </tr>
       

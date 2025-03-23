@@ -1,3 +1,79 @@
+<?php 
+  require_once('database/db.php');
+
+  if(isset($_POST['register']))
+  {
+    $allowed_extensions = ['jpg', 'jpeg', 'png'];
+
+      // Get the file name and extension
+      $filename = $_FILES["photo"]["name"];
+      $temp_name = $_FILES["photo"]["tmp_name"];
+      $file_ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION)); // Extract extension
+
+      // Validate file extension
+      if (!in_array($file_ext, $allowed_extensions)) {
+          echo "<p style='color:red;'>Only JPG, JPEG, and PNG files are allowed.</p>";
+      } else {
+          // Move the file if valid
+          $folder = "images/" . $filename;
+          if (!move_uploaded_file($temp_name, $folder)) {
+              echo "<p style='color:red;'>File upload failed!</p>";  
+          }
+      }
+      //for upload the file
+
+      // $filename =  $_FILES["upload_file"]["name"];
+      // $temp_name = $_FILES["upload_file"]["tmp_name"];
+      $folder = "images/".$filename;
+      move_uploaded_file($temp_name, $folder);
+
+      $username = trim($_POST['username']);
+      $email = trim($_POST['email']);
+      $password = trim($_POST['password']);
+      $confirmpassword = trim($_POST['confirm_password']);
+      $phone = trim($_POST['mobile']);
+      
+
+      if ($password !== $confirmpassword) {
+          die("Passwords do not match!");
+      }    
+
+      if (!preg_match('/^(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{5,}$/', $password)) 
+      {        
+          die("Password is not in correct format");
+      }    
+        
+      if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        die("Invalid email format!");
+    }    
+    
+
+    // Insert user into the database
+    $sql = "INSERT INTO register (username, email, password, confirm_password, mobile) VALUES (?,?, ?, ?, ?)";
+    $stmtinsert = $conn->prepare($sql);
+
+    $stmtinsert->bind_param("sssss", $username, $email, $password, $confirmpassword, $phone);    // bind_param() : bind_param() is a function in PHP used with MySQLi prepared statements
+    
+    // to bind actual values to placeholders (?) in an SQL query
+    
+    if ($stmtinsert->execute()) {
+      echo "INSERTED";  
+      header("Location: login.php"); // Redirect to login page
+        // exit;
+    } else {
+        echo "Error: " .$conn->error;
+    }
+
+    $stmtinsert->close(); //closing the statement after the execution
+    $conn->close(); // closing the database
+
+      // $sql = "INSERT INTO register (photo, username, email, password, confirm_password, mobile) VALUES (?,?, ?, ?, ?, ?)";
+      // header("Location:login.php");
+      // echo "SUBMITTED";
+  }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <!-- [Head] start -->
@@ -378,78 +454,3 @@
 
 
 
-<?php 
-  require_once('database/db.php');
-
-  if(isset($_POST['register']))
-  {
-    $allowed_extensions = ['jpg', 'jpeg', 'png'];
-
-      // Get the file name and extension
-      $filename = $_FILES["photo"]["name"];
-      $temp_name = $_FILES["photo"]["tmp_name"];
-      $file_ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION)); // Extract extension
-
-      // Validate file extension
-      if (!in_array($file_ext, $allowed_extensions)) {
-          echo "<p style='color:red;'>Only JPG, JPEG, and PNG files are allowed.</p>";
-      } else {
-          // Move the file if valid
-          $folder = "images/" . $filename;
-          if (!move_uploaded_file($temp_name, $folder)) {
-              echo "<p style='color:red;'>File upload failed!</p>";  
-          }
-      }
-      //for upload the file
-
-      // $filename =  $_FILES["upload_file"]["name"];
-      // $temp_name = $_FILES["upload_file"]["tmp_name"];
-      $folder = "images/".$filename;
-      move_uploaded_file($temp_name, $folder);
-
-      $username = trim($_POST['username']);
-      $email = trim($_POST['email']);
-      $password = trim($_POST['password']);
-      $confirmpassword = trim($_POST['confirm_password']);
-      $phone = trim($_POST['mobile']);
-      
-
-      if ($password !== $confirmpassword) {
-          die("Passwords do not match!");
-      }    
-
-      if (!preg_match('/^(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{5,}$/', $password)) {
-              
-          die("Password is not in correct format");
-      }    
-        
-      if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        die("Invalid email format!");
-    }    
-    
-
-    // Insert user into the database
-    $sql = "INSERT INTO register (username, email, password, confirm_password, mobile) VALUES (?,?, ?, ?, ?)";
-    $stmtinsert = $conn->prepare($sql);
-
-    $stmtinsert->bind_param("sssss", $username, $email, $password, $confirmpassword, $phone);    // bind_param() : bind_param() is a function in PHP used with MySQLi prepared statements
-    
-    // to bind actual values to placeholders (?) in an SQL query
-    
-    if ($stmtinsert->execute()) {
-      echo "INSERTED";  
-      header("Location: login.php"); // Redirect to login page
-        // exit;
-    } else {
-        echo "Error: " .$conn->error;
-    }
-
-    $stmtinsert->close(); //closing the statement after the execution
-    $conn->close(); // closing the database
-
-      // $sql = "INSERT INTO register (photo, username, email, password, confirm_password, mobile) VALUES (?,?, ?, ?, ?, ?)";
-      // header("Location:login.php");
-      // echo "SUBMITTED";
-  }
-
-?>
