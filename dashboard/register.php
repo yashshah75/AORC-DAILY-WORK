@@ -427,34 +427,6 @@
         die("Invalid email format!");
     }    
     
-    // $check_email = "SELECT * FROM register WHERE email = ?";
-    
-    // $stmt = $conn->prepare($check_email); // The prepare() function is used to create a SQL statement template before executing it.
-    //                                       // This helps prevent SQL injection attacks.
-    //                                       // It allows binding of parameters dynamically, making queries more efficient and secure.
-    
-    // $stmt->bind_param("s", $email); //bind_param                                      
-    // $stmt->execute();
-    // $stmt->store_result();                                   
-
-    // if ($stmt->num_rows > 0) {
-    //     die("Email already registered!");
-    // }    
-    // $stmt->close();
-
-
-
-    // $check_username = "SELECT * FROM register WHERE username = ?";
-
-    // $stmt = $conn->prepare($check_username);
-    // $stmt->bind_param("s",$username);
-    // $stmt->execute();
-    // $stmt->store_result();
-
-    // if ($stmt->num_rows > 0) {
-    //     die("Username already registered!");             
-    // }    
-    // $stmt->close();
 
     // Insert user into the database
     $sql = "INSERT INTO register (username, email, password, confirm_password, mobile) VALUES (?,?, ?, ?, ?)";
