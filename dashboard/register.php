@@ -12,10 +12,11 @@
       $filename = $_FILES["photo"]["name"];
       $temp_name = $_FILES["photo"]["tmp_name"];
       $file_ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION)); // Extract extension
+      
 
       // Validate file extension
       if (!in_array($file_ext, $allowed_extensions)) {
-          echo "<p style='color:red;'>Only JPG, JPEG, and PNG files are allowed.</p>";
+         die("<p style='color:red;'>Only JPG, JPEG, and PNG files are allowed.</p>");
       } else {
           // Move the file if valid
           $folder = "images/" . $filename;
@@ -27,8 +28,8 @@
 
       // $filename =  $_FILES["upload_file"]["name"];
       // $temp_name = $_FILES["upload_file"]["tmp_name"];
-      $folder = "images/".$filename;
-      move_uploaded_file($temp_name, $folder);
+      // $folder = "images/".$filename;
+      // move_uploaded_file($temp_name, $folder);
 
       $username = trim($_POST['username']);
       $email = trim($_POST['email']);
@@ -80,17 +81,17 @@
     $stmt->close();
 
     // Insert user into the database
-    $sql = "INSERT INTO register (username, email, password, confirm_password, mobile) VALUES (?,?, ?, ?, ?)";
+    $sql = "INSERT INTO register (photo,username, email, password, confirm_password, mobile) VALUES (?,?,?,?,?,?)";
     $stmtinsert = $conn->prepare($sql);
 
-    $stmtinsert->bind_param("sssss", $username, $email, $password, $confirmpassword, $phone);    // bind_param() : bind_param() is a function in PHP used with MySQLi prepared statements
+    $stmtinsert->bind_param("ssssss", $folder, $username, $email, $password, $confirmpassword, $phone);    // bind_param() : bind_param() is a function in PHP used with MySQLi prepared statements
     
     // to bind actual values to placeholders (?) in an SQL query
     
     if ($stmtinsert->execute()) {
       // echo "INSERTED";  
       header("Location: login.php"); // Redirect to login page
-        // exit;
+        exit();
     } else {
         echo "Error: " .$conn->error;
     }
@@ -175,7 +176,7 @@
             <div class="col-md-12">  
               <div class="form-group mb-3">
                 <label class="form-label">Your Photo: </label>
-                <input type="file" id="imageInput" name="photo" accept=".jpg, .jpeg, .png" class="form-control">
+                <input type="file" id="imageInput" name="photo" accept=".jpg, .jpeg, .png" class="form-control" Required>
                 <span class="span" style="color:red;"> Only JPG, JPEG, and PNG files are allowed</span>
               </div>
             </div>
@@ -184,7 +185,7 @@
             <div class="col-md-12">
               <div class="form-group mb-3">
                 <label class="form-label">Username</label>
-                <input type="text" class="form-control" placeholder="Enter Your Username" name="username">
+                <input type="text" class="form-control" placeholder="Enter Your Username" name="username" Required>
               </div>
             </div>
             
@@ -196,12 +197,12 @@
             
             <div class="form-group mb-3">
               <label class="form-label">Email Address</label>
-              <input type="email" class="form-control" placeholder="Email Address" name="email">
+              <input type="email" class="form-control" placeholder="Email Address" name="email" Required>
             </div>
             
             <div class="form-group mb-3">
               <label class="form-label">Password</label>
-              <input type="password" class="form-control" placeholder="Password" name="password">
+              <input type="password" class="form-control" placeholder="Password" name="password" Required>
               <span style="color:red";> Password should be in this format: Abc@123 <br>
                Password must be at least 5 characters long</span>
             </div>
@@ -209,7 +210,7 @@
             <div class="col-md-12">
                 <div class="form-group mb-3">
                   <label class="form-label">Confirm Password</label>
-                  <input type="password" class="form-control" placeholder="Confirm Password" name="confirm_password">
+                  <input type="password" class="form-control" placeholder="Confirm Password" name="confirm_password" Required>
                   <span style="color:red";> Password should be in this format: Abc@123</span>
                   <span style="color:red";> Password must be at least 5 characters long</span>
                 </div>
@@ -218,7 +219,7 @@
             <div class="col-md-12">
               <div class="form-group mb-3">
                 <label class="form-label">Phone Number</label>
-                <input type="tel" class="form-control" placeholder="Mobile should be 10 digits" name="mobile">
+                <input type="tel" class="form-control" placeholder="Mobile should be 10 digits" name="mobile" Required>
               </div>
             </div>
 

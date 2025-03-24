@@ -1,3 +1,14 @@
+<?php 
+  session_start();
+
+  include("database/db.php"); // include database connection
+
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <!-- [Head] start -->
@@ -43,34 +54,44 @@
   </div>
   <!-- [ Pre-loader ] End -->
 
+
+
   <div class="auth-main">
     <div class="auth-wrapper v3">
       <div class="auth-form">
         <div class="auth-header">
+
+
           <a href="#"><img src="https://themewagon.github.io/Mantis-Bootstrap/assets/images/logo-dark.svg" alt="img"></a>
         </div>
+ 
         <div class="card my-5">
           <div class="card-body">
+
             <div class="d-flex justify-content-between align-items-end mb-4">
               <h3 class="mb-0"><b>Login</b></h3>
               <a href="register.php" class="link-primary">Don't have an account?</a>
             </div>
+            
+
+            <form method="POST" action="" autocomplete= "off">
+            
             <div class="form-group mb-3">
-              <label class="form-label">Email Address</label>
-              <input type="email" class="form-control" placeholder="Email Address">
+              <label class="form-label">Email or Username</label>
+              <input type="text" class="form-control" placeholder="Email Address" name="username" required>
             </div>
             <div class="form-group mb-3">
               <label class="form-label">Password</label>
-              <input type="password" class="form-control" placeholder="Password">
+              <input type="password" class="form-control" placeholder="Password" name="password" required>
             </div>
             <div class="d-flex mt-1 justify-content-between">
 				
               <a href="forgotpass.php">Forgot Password?</a>
             </div>
             <div class="d-grid mt-4">
-              <a href="index.php"><button type="button" class="btn btn-primary">Login</button></a>
+              <button type="submit" class="btn btn-primary" name="login">Login</button>
             </div>
-            
+      
 			<!-- <div class="saprator mt-3">
               <span>Login with</span>
             </div> -->
@@ -98,7 +119,44 @@
               </div>
             </div> -->
           
-			</div>
+			
+          </div>
+          <?php 
+      
+
+      if(isset($_POST['login']))
+      {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        $query = "SELECT username, email, password FROM register WHERE username = ? OR email=?";
+        $stmt = mysqli_prepare($conn,$query);
+        mysqli_stmt_bind_param($stmt, "ss", $username, $username);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+
+        if($row = mysqli_fetch_assoc($result))
+        {
+          if (password_verify($password, $row['password']))
+          {
+          $_SESSION['user_name'] = $username;
+          header('Location: index.php');
+          exit();
+        }
+        else
+          {
+            echo "<h4 style='color:red;'>Incorrect Password</h4>";
+          }
+        }
+      else
+        {
+          echo "<h4 style='color:red;'>User Not Found</h4>";
+        }
+      }
+
+
+      
+    ?>
         </div>
         
 		<div class="auth-footer row">
@@ -156,3 +214,5 @@
 
 <!-- Mirrored from themewagon.github.io/Mantis-Bootstrap/pages/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 20 Mar 2025 06:40:54 GMT -->
 </html>
+
+
