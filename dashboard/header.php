@@ -1,4 +1,10 @@
+<?php 
+// session_start();
+include('database/db.php');
+// include('header.php');
+// include('index.php');
 
+?>
 <header class="pc-header">
   <div class="header-wrapper">
     <div class="me-auto pc-mob-drp">
@@ -107,7 +113,8 @@
         <li class="dropdown pc-h-item header-user-profile">
           <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" data-bs-auto-close="outside" aria-expanded="false">
             <img src="../assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar">
-            <span>Yash Shah</span>
+            <?php echo "<span>".$_SESSION['user_name']."</span>";?>
+           
           </a>
           <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
             <div class="dropdown-header">
@@ -116,7 +123,7 @@
                   <img src="../assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar wid-35">
                 </div>
                 <div class="flex-grow-1 ms-3">
-                  <h6 class="mb-1">Yash Shah</h6>
+                  <h6 class="mb-1"><?php echo "<span>".$_SESSION['user_name']."</span>";?> </h6>
                   <span>UI/UX Designer</span>
                 </div>
                 <a href="login.php" class="pc-head-link bg-transparent"><i class="ti ti-power text-danger"></i></a>
@@ -151,10 +158,12 @@
                   <i class="ti ti-wallet"></i>
                   <span>Billing</span>
                 </a> -->
-                <a href="login.php" class="dropdown-item">
+                
+                <a href="login.php" class="dropdown-item" value="logout" name="logout">
                   <i class="ti ti-power"></i>
                   <span>Logout</span>
                 </a>
+              
               </div>
               <!-- <div class="tab-pane fade" id="drp-tab-2" role="tabpanel" aria-labelledby="drp-t2" tabindex="0">
                 <a href="#!" class="dropdown-item">

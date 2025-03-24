@@ -1,6 +1,3 @@
-<!-- ============================================================  -->
-                        <!-- PHP CODE  -->
-<!-- ============================================================ -->
 <?php 
   require_once('database/db.php');
 
@@ -51,6 +48,8 @@
         die("Invalid email format!");
     }    
     
+    $hashed_password = password_hash($password, PASSWORD_BCRYPT); //BCRYPT is secure hashing method 
+    $hashed_cpass = password_hash($confirmpassword, PASSWORD_BCRYPT);
 
     $check_email = "SELECT * FROM register WHERE email = ?";
     
@@ -81,10 +80,10 @@
     $stmt->close();
 
     // Insert user into the database
-    $sql = "INSERT INTO register (photo,username, email, password, confirm_password, mobile) VALUES (?,?,?,?,?,?)";
+    $sql = "INSERT INTO register (photo, username, email, password, confirm_password, mobile) VALUES (?,?,?,?,?,?)";
     $stmtinsert = $conn->prepare($sql);
 
-    $stmtinsert->bind_param("ssssss", $folder, $username, $email, $password, $confirmpassword, $phone);    // bind_param() : bind_param() is a function in PHP used with MySQLi prepared statements
+    $stmtinsert->bind_param("ssssss", $folder, $username, $email, $hashed_password, $hashed_cpass, $phone);    // bind_param() : bind_param() is a function in PHP used with MySQLi prepared statements
     
     // to bind actual values to placeholders (?) in an SQL query
     
@@ -497,3 +496,6 @@
 
 
 
+<!-- ============================================================  -->
+                        <!-- PHP CODE  -->
+<!-- ============================================================ -->

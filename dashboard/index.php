@@ -1,9 +1,35 @@
-
 <?php
 include('database/db.php');
+session_start();
 include('sidebar.php');
 include('header.php');
+        
 ?>
+
+
+<?php  
+error_reporting(0);
+    $user_profile = $_SESSION['user_name'];
+
+    if($user_profile == TRUE)
+    {
+        // header('Location: register.php');
+    }
+    else
+    {
+        header('Location: login.php');
+        
+    }
+
+    $query = "SELECT * FROM register";
+    
+    $data = mysqli_query($conn, $query);
+
+    $total = mysqli_num_rows($data); //it will presents how many number of rows are present in the table
+
+    if($total != 0)
+    { 
+  ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -93,53 +119,35 @@ include('header.php');
         </tr>
       </thead>
       <tbody>
-       
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>@mdo</td>
-          <td>@mdo</td>
+<?php 
+error_reporting(0);
+    while($result = mysqli_fetch_assoc($data))
+    {
+        echo "<tr>
+          <td>".$result['ID']."</td>
+          <td><img src = '".$result['photo']."' height='50px' width='50px' alt='image'></td>
+          <td>".$result['username']."</td>
+          <td>".$result['email']."</td>
+          <td>".$result['password']."</td>
+          <td>".$result['confirm_password']."</td>
+          <td>".$result['mobile']."</td>
+          
           <td>
-            <a href="update_profile.php"> <button type="button" class="btn btn-success">UPDATE </button> </a> &nbsp;
-            <button type="button" class="btn btn-danger">DELETE </button>
-            <select name="" id="">SELECT
-              <option value="">option</option>
-              <option value="">option</option>
-              <option value="">option</option>
-            </select>
+            <a href='update_profile.php'> <button type='submit' class='btn btn-success'>UPDATE </button> </a><br><br>
+            <button type='submit' class='btn btn-danger'>DELETE </button>
+
           </td>
-        </tr>
+        </tr>";
+        // echo "<br>";
+    }
+    }
+
+    else
+    {
+      echo "No records found";
+    }
+?>
       
-        <tr>
-          <th>2</th>
-          <td>Jacob</td>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-          <td>@mdo</td>
-          <td>@mdo</td>
-          <td>
-            <a href="update_profile.php"> <button type="button" class="btn btn-success">UPDATE </button> </a> &nbsp;
-            <button type="button" class="btn btn-danger">DELETE</button>
-          </td>
-        </tr>
-      
-        <tr>
-          <th>3</th>
-          <td>Larry the Bird</td>
-          <td>@twitter</td>
-          <td>@twitter</td>
-          <td>@fat</td>
-          <td>@mdo</td>
-          <td>@mdo</td>
-          <td>
-          <a href="update_profile.php"> <button type="button" class="btn btn-success">UPDATE </button> </a> &nbsp;
-              <button type="button" class="btn btn-danger">DELETE</button>
-          </td>
-        </tr>
         
       </tbody>
     </table>

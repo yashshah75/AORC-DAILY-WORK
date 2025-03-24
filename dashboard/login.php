@@ -80,10 +80,12 @@
               <label class="form-label">Email or Username</label>
               <input type="text" class="form-control" placeholder="Email Address" name="username" required>
             </div>
+
             <div class="form-group mb-3">
               <label class="form-label">Password</label>
               <input type="password" class="form-control" placeholder="Password" name="password" required>
             </div>
+
             <div class="d-flex mt-1 justify-content-between">
 				
               <a href="forgotpass.php">Forgot Password?</a>
@@ -121,42 +123,7 @@
           
 			
           </div>
-          <?php 
-      
 
-      if(isset($_POST['login']))
-      {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-
-        $query = "SELECT username, email, password FROM register WHERE username = ? OR email=?";
-        $stmt = mysqli_prepare($conn,$query);
-        mysqli_stmt_bind_param($stmt, "ss", $username, $username);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
-
-        if($row = mysqli_fetch_assoc($result))
-        {
-          if (password_verify($password, $row['password']))
-          {
-          $_SESSION['user_name'] = $username;
-          header('Location: index.php');
-          exit();
-        }
-        else
-          {
-            echo "<h4 style='color:red;'>Incorrect Password</h4>";
-          }
-        }
-      else
-        {
-          echo "<h4 style='color:red;'>User Not Found</h4>";
-        }
-      }
-
-
-      
-    ?>
         </div>
         
 		<div class="auth-footer row">
@@ -215,4 +182,42 @@
 <!-- Mirrored from themewagon.github.io/Mantis-Bootstrap/pages/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 20 Mar 2025 06:40:54 GMT -->
 </html>
 
+<?php 
+      
 
+      if(isset($_POST['login']))
+      {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        
+
+        $query = "SELECT username, email, password FROM register WHERE username = ? OR email = ?";
+        $stmt = mysqli_prepare($conn, $query);
+        mysqli_stmt_bind_param($stmt, "ss", $username, $username);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+
+        if($row = mysqli_fetch_assoc($result))
+        {
+          $hashed_password = $row['password'];
+          if (password_verify($password, $hashed_password))
+          {
+            $_SESSION['user_name'] = $username;
+            echo "SESSION IS STARTED";
+            header('Location: index.php');
+            exit();
+        }
+        else
+          {
+            echo "<h4 style='color:red;'>Incorrect Password</h4>";
+          }
+        }
+      else
+        {
+          echo "<h4 style='color:red;'>User Not Found</h4>";
+        }
+      }
+    
+
+      
+    ?>
