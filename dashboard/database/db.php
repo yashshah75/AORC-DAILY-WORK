@@ -6,13 +6,7 @@
 
     $conn = mysqli_connect($servername, $username, $password, $dbname);
 
-    if($conn)
-    {
-        // header('location:sidebar.php');
-        // echo "Connected";
-    }
-    else
-    {
-        echo "disconnected";
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
     }
     ?>

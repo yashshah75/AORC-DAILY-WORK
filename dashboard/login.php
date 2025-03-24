@@ -1,8 +1,6 @@
 <?php 
-  session_start();
-
+  // session_start();
   include("database/db.php"); // include database connection
-
 
 ?>
 
@@ -182,30 +180,28 @@
 <!-- Mirrored from themewagon.github.io/Mantis-Bootstrap/pages/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 20 Mar 2025 06:40:54 GMT -->
 </html>
 
-<?php 
-      
 
-      if(isset($_POST['login']))
+<?php
+if(isset($_POST['login']))
       {
         $username = $_POST['username'];
         $password = $_POST['password'];
         
-
-        $query = "SELECT username, email, password FROM register WHERE username = ? OR email = ?";
+        $query = "SELECT username, email, password FROM register WHERE username = ? OR email = ?";        
         $stmt = mysqli_prepare($conn, $query);
         mysqli_stmt_bind_param($stmt, "ss", $username, $username);
+        // mysqli_stmt_bind_param($stmt, "ss", $username, $username);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
 
         if($row = mysqli_fetch_assoc($result))
         {
           $hashed_password = $row['password'];
-          if (password_verify($password, $hashed_password))
-          {
+          if (password_verify($password, $hashed_password)) {
+            session_start();
             $_SESSION['user_name'] = $username;
-            echo "SESSION IS STARTED";
             header('Location: index.php');
-            exit();
+            exit(); // Ensure script stops execution after redirection
         }
         else
           {
@@ -220,4 +216,4 @@
     
 
       
-    ?>
+?>

@@ -1,18 +1,15 @@
 <?php
-include('database/db.php');
 session_start();
+include('database/db.php');
 include('sidebar.php');
 include('header.php');
-        
-?>
-
-
-<?php  
+  
 error_reporting(0);
     $user_profile = $_SESSION['user_name'];
 
-    if($user_profile == TRUE)
+    if(!$user_profile == TRUE)
     {
+      // echo "session";
         // header('Location: register.php');
     }
     else
@@ -120,7 +117,7 @@ error_reporting(0);
       </thead>
       <tbody>
 <?php 
-error_reporting(0);
+// error_reporting(0);
     while($result = mysqli_fetch_assoc($data))
     {
         echo "<tr>
