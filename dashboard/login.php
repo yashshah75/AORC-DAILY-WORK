@@ -1,5 +1,6 @@
 <?php 
-  // session_start();
+  session_start();
+  
   include("database/db.php"); // include database connection
 
 ?>
@@ -76,7 +77,7 @@
             
             <div class="form-group mb-3">
               <label class="form-label">Email or Username</label>
-              <input type="text" class="form-control" placeholder="Email Address" name="username" required>
+              <input type="text" class="form-control" placeholder="Enter your User name or Email" name="username" required>
             </div>
 
             <div class="form-group mb-3">
@@ -85,9 +86,9 @@
             </div>
 
             <div class="d-flex mt-1 justify-content-between">
-				
               <a href="forgotpass.php">Forgot Password?</a>
             </div>
+
             <div class="d-grid mt-4">
               <button type="submit" class="btn btn-primary" name="login">Login</button>
             </div>
@@ -172,7 +173,7 @@
   <script>font_change("Public-Sans");</script>
   
     
- 
+ </form>
 </body>
 <!-- [Body] end -->
 

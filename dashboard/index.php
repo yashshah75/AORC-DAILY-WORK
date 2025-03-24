@@ -1,31 +1,33 @@
 <?php
-session_start();
-include('database/db.php');
-include('sidebar.php');
-include('header.php');
-  
-error_reporting(0);
-    $user_profile = $_SESSION['user_name'];
+    session_start();
+    include('database/db.php');
+    // include('sidebar.php');
+    // include('header.php');
+    ?>
 
-    if(!$user_profile == TRUE)
-    {
-      // echo "session";
-        // header('Location: register.php');
-    }
-    else
-    {
-        header('Location: login.php');
-        
-    }
+  <?php
+      // error_reporting(0);
+      $user_profile = $_SESSION['user_name'];
 
-    $query = "SELECT * FROM register";
-    
-    $data = mysqli_query($conn, $query);
+      if($user_profile == TRUE)
+      {
+        // echo "session";
+          // header('Location: register.php');
+      }
+      else
+      {
+          header('Location: login.php');
+          
+      }
 
-    $total = mysqli_num_rows($data); //it will presents how many number of rows are present in the table
+      $query = "SELECT * FROM register";
+      
+      $data = mysqli_query($conn, $query);
 
-    if($total != 0)
-    { 
+      $total = mysqli_num_rows($data); //it will presents how many number of rows are present in the table
+
+      if($total != 0)
+      { 
   ?>
 
 <!DOCTYPE html>
