@@ -1,24 +1,15 @@
 <?php
     session_start();
+
+    if(!isset($_SESSION['user_name']))
+    {
+      header('Location: login.php');
+      exit();
+    }
+
     include('database/db.php');
-    // include('sidebar.php');
-    // include('header.php');
-    ?>
-
-  <?php
-      // error_reporting(0);
-      $user_profile = $_SESSION['user_name'];
-
-      if($user_profile == TRUE)
-      {
-        // echo "session";
-          // header('Location: register.php');
-      }
-      else
-      {
-          header('Location: login.php');
-          
-      }
+    include('sidebar.php');
+    include('header.php');
 
       $query = "SELECT * FROM register";
       

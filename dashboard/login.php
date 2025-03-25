@@ -1,10 +1,42 @@
 <?php 
   session_start();
-  
   include("database/db.php"); // include database connection
-
 ?>
 
+<?php
+if(isset($_POST['login']))
+      {
+        $username = trim($_POST['email']);
+        $password = trim($_POST['password']);
+        
+        $query = "SELECT password FROM register WHERE email = ?";        
+        $stmt = mysqli_prepare($conn, $query);
+        mysqli_stmt_bind_param($stmt, "s", $username);
+        // mysqli_stmt_bind_param($stmt, "ss", $username, $username);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+
+        if($row = mysqli_fetch_assoc($result))
+        {
+          $hashed_password = $row['password'];
+          
+          if (password_verify($password, $hashed_password)) {
+            $_SESSION['user_name'] = $username;
+            header('Location: index.php');
+            exit(); // Ensure script stops execution after redirection
+        }
+        else
+          {
+            echo "<h4 style='color:red;'>Incorrect Password</h4>";
+          }
+        }
+      else
+        {
+          echo "<h4 style='color:red;'>User Not Found</h4>";
+        }
+      }
+  
+?>
 
 
 
@@ -77,7 +109,7 @@
             
             <div class="form-group mb-3">
               <label class="form-label">Email or Username</label>
-              <input type="text" class="form-control" placeholder="Enter your User name or Email" name="username" required>
+              <input type="text" class="form-control" placeholder="Enter your User name or Email" name="email" required>
             </div>
 
             <div class="form-group mb-3">
@@ -124,7 +156,7 @@
           </div>
 
         </div>
-        
+        </form>
 		<div class="auth-footer row">
           <!-- <div class=""> -->
             <div class="col my-1">
@@ -173,7 +205,7 @@
   <script>font_change("Public-Sans");</script>
   
     
- </form>
+
 </body>
 <!-- [Body] end -->
 
@@ -182,39 +214,5 @@
 </html>
 
 
-<?php
-if(isset($_POST['login']))
-      {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        
-        $query = "SELECT username, email, password FROM register WHERE username = ? OR email = ?";        
-        $stmt = mysqli_prepare($conn, $query);
-        mysqli_stmt_bind_param($stmt, "ss", $username, $username);
-        // mysqli_stmt_bind_param($stmt, "ss", $username, $username);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
 
-        if($row = mysqli_fetch_assoc($result))
-        {
-          $hashed_password = $row['password'];
-          if (password_verify($password, $hashed_password)) {
-            session_start();
-            $_SESSION['user_name'] = $username;
-            header('Location: index.php');
-            exit(); // Ensure script stops execution after redirection
-        }
-        else
-          {
-            echo "<h4 style='color:red;'>Incorrect Password</h4>";
-          }
-        }
-      else
-        {
-          echo "<h4 style='color:red;'>User Not Found</h4>";
-        }
-      }
-    
 
-      
-?>
