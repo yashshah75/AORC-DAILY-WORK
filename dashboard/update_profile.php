@@ -1,21 +1,21 @@
 <?php 
   session_start();
   require_once('database/db.php');
-  $uid = $_GET['Id'];
+  $uid = $_GET['id'];
 
-  $user_profile = $_SESSION['user_name'];
+  // $user_profile = $_SESSION['user_name'];
 
-  if($use_profile == true)
-  {
+  // if($use_profile == true)
+  // {
 
-  }
-  else
-  {
-    header('Location: login.php');
+  // }
+  // else
+  // {
+  //   header('Location: login.php');
 
-  }
+  // }
 
-  $query = "SELECT * FROM register WHERE id='$uid'";
+  $query = "SELECT * FROM register WHERE ID='$uid'";
   $data = mysqli_query($conn, $query);
 
   $result = mysqli_fetch_assoc($data);
@@ -78,13 +78,16 @@
           
             <div class="d-flex justify-content-between align-items-end mb-4">
               <h3 class="mb-0"><b>Update Profile</b></h3>
-              <!-- <a href="login.php" class="link-primary">Already have an account?</a> -->
             </div>
+
+            <form action="" method="POST" enctype="multipart/form-data">
             <!-- <div class="row"> -->
               <div class="col-md-12">  
                 <div class="form-group mb-3">
+                <img src="<?php echo $result['photo']; ?>" alt="Profile Image" width="100"><br>
+
                   <label class="form-label">Your Photo: </label>
-                  <input type="file" id="imageInput" name="photo" accept=".jpg, .jpeg, .png" class="form-control" Required>
+                  <input type="file" id="imageInput" name="photo" value="<?php echo $result['photo'] ?>" accept=".jpg, .jpeg, .png" class="form-control" >
                   <span class="span" style="color:red;"> Only JPG, JPEG, and PNG files are allowed</span>
                 </div>
               </div>
@@ -92,37 +95,33 @@
               <div class="col-md-12">
                 <div class="form-group mb-3">
                   <label class="form-label">Username</label>
-                  <input type="text" class="form-control" >
+                  <input type="text" class="form-control" value="<?php echo $result['username']?>" name="username">
                 </div>
               </div>
             
             <!-- </div> -->
             <div class="form-group mb-3">
               <label class="form-label">Email</label>
-              <input type="email" class="form-control" placeholder="Enter Your Email">
-            </div>
-            
-            <div class="form-group mb-3">
-              <label class="form-label">Email Address</label>
-              <input type="email" class="form-control">
+              <input type="email" class="form-control" placeholder="Enter Your Email" value="<?php echo $result['email']?>" name="email">
             </div>
 
               <div class="col-md-12">
                 <div class="form-group mb-3">
                   <label class="form-label">Phone Number</label>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" value="<?php echo $result['mobile']?>" name="mobile">
                 </div>
               </div>
 
             <!-- <p class="mt-4 text-sm text-muted">By Signing up, you agree to our <a href="#" class="text-primary"> Terms of Service </a> and <a href="#" class="text-primary"> Privacy Policy</a></p> -->
             <div class="d-grid mt-3">
-              <button type="submit" class="btn btn-primary" name = "update">UPDATE</button></a><br>
+              <a href="index.php"><button type="submit" class="btn btn-primary" name = "update">UPDATE</button></a>
+              <br>
               <a href="index.php">Back</a>
             </div>
-
             
+          </div>
         </div>
-        </div>
+      </form>
         <div class="auth-footer row">
           <!-- <div class=""> -->
             <div class="col my-1">
@@ -360,11 +359,10 @@
 <?php 
   if(isset($_POST['update']))
   {
-    $photo = trim($_POST['photo']);
+    $folder = $result['photo'];
     $username = trim($_POST['username']);
     $email = trim($_POST['email']);
-    $phone = trim($_POST['phone']);
-
+    $phone = trim($_POST['mobile']);
     if (!empty($_FILES['photo']['name'])) {
       $filename = $_FILES['photo']['name'];
       $tempname = $_FILES['photo']['tmp_name'];
@@ -385,7 +383,7 @@
       }
 
 
-      $query = "UPDATE register SET image = '$folder', username='$username', email='$email', phone='$phone' WHERE id='$uid'";
+      $query = "UPDATE register SET photo = '$folder', username='$username', email='$email', mobile='$phone' WHERE id='$uid'";
 
         $data = mysqli_query($conn,$query);
     
@@ -396,7 +394,7 @@
         else
         {   
         ?>
-          <meta http-equiv = "refresh" content = "2; url = http://localhost/1.%20AORC%20TECHNOLOGIES/PRACTICE/7.crud_html/Mantis-Bootstrap/dashboard/index.php />
+          <meta http-equiv = "refresh" content = "2; url = http://localhost/1.%20AORC%20TECHNOLOGIES/PRACTICE/7.crud_html/Mantis-Bootstrap/dashboard/index.php" />
         
         <?php
             echo "";

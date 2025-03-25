@@ -1,11 +1,11 @@
 <?php
     session_start();
 
-    // if(!isset($_SESSION['user_name']))
-    // {
-    //   header('Location: register.php');
-    //   exit();
-    // }
+    if(!isset($_SESSION['user_name']))
+    {
+      header('Location: login.php');
+      exit();
+    }
 
     include('database/db.php');
     include('sidebar.php');
@@ -123,9 +123,10 @@
           <td>".$result['mobile']."</td>
           
           <td>
-            <a href='update_profile.php?Id=$result[ID]'> <button class='btn btn-success'>UPDATE </button> </a>
+            <a href='update_profile.php?id=$result[ID]'> <button class='btn btn-success'>UPDATE </button> </a>
             <br><br>
-             <a href='delete.php'> <button type='submit' class='btn btn-danger'>DELETE </button>
+             <a href='delete.php'?id=$result[ID]'> <button type='submit' class='btn btn-danger'>DELETE </button>
+
 
           </td>
         </tr>";
