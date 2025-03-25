@@ -23,7 +23,11 @@
                 <i data-feather="search"></i>
                 <input type="search" class="form-control border-0 shadow-none" placeholder="Search here. . .">
               </div>
+
+             
             </form>
+
+            
           </div>
         </li>
         <li class="pc-h-item d-none d-md-inline-flex">
@@ -37,6 +41,13 @@
     <div class="ms-auto">
       <ul class="list-unstyled">
         <li class="dropdown pc-h-item">
+          
+          <?php if (isset($_SESSION['user_name'])) {
+                echo "<span>Welcome: ".$_SESSION['user_name']."</span>";}
+              else {
+                echo "<span>Guest</span>"; // Default text if the user is not logged in
+                    } ?>
+          
           <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
             <i class="ti ti-mail"></i>
           </a>
@@ -107,7 +118,11 @@
         <li class="dropdown pc-h-item header-user-profile">
           <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" data-bs-auto-close="outside" aria-expanded="false">
             <img src="../assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar">
-  
+            <?php if (isset($_SESSION['user_name'])) {
+                echo "<span>".$_SESSION['user_name']."</span>";}
+              else {
+                echo "<span>Guest</span>"; // Default text if the user is not logged in
+                    } ?>
            
           </a>
           <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
@@ -117,7 +132,15 @@
                   <img src="../assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar wid-35">
                 </div>
                 <div class="flex-grow-1 ms-3">
-                  <h6 class="mb-1">
+                  <h6 class="mb-1"><?php if (isset($_SESSION['user_name']))
+                                          {
+                                            echo "<span>".$_SESSION['user_name']."</span>";
+                                          }
+                                          else 
+                                            {
+                                              echo "<span>Guest</span>"; // Default text if the user is not logged in
+                                            } 
+                                            ?>
                                             </h6>
                   <span>UI/UX Designer</span>
                 </div>
