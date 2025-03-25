@@ -11,7 +11,7 @@
   }
   else
   {
-    header('location: login.php');
+    header('Location: login.php');
 
   }
 
@@ -365,9 +365,9 @@
     $email = trim($_POST['email']);
     $phone = trim($_POST['phone']);
 
-    if (!empty($_FILES['User_image']['name'])) {
-      $filename = $_FILES['User_image']['name'];
-      $tempname = $_FILES['User_image']['tmp_name'];
+    if (!empty($_FILES['photo']['name'])) {
+      $filename = $_FILES['photo']['name'];
+      $tempname = $_FILES['photo']['tmp_name'];
       $folder = "images/".$filename;
       
       if(!move_uploaded_file($tempname, $folder))
@@ -383,6 +383,27 @@
       if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
           die("Invalid email format!");
       }
+
+
+      $query = "UPDATE register SET image = '$folder', username='$username', email='$email', phone='$phone' WHERE id='$uid'";
+
+        $data = mysqli_query($conn,$query);
+    
+        if(!$data)
+        {
+            echo "Record not Updated";
+        }
+        else
+        {   
+        ?>
+          <meta http-equiv = "refresh" content = "2; url = http://localhost/1.%20AORC%20TECHNOLOGIES/PRACTICE/7.crud_html/Mantis-Bootstrap/dashboard/index.php />
+        
+        <?php
+            echo "";
+            
+            $message = "Record Updated Successfully!";
+            echo "<div style='padding: 10px; background-color: green; color: white; text-align: center;'>$message</div>";
+        }
 
     }
 

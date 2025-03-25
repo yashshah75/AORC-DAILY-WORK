@@ -1,11 +1,11 @@
 <?php
     session_start();
 
-    if(!isset($_SESSION['user_name']))
-    {
-      header('Location: login.php');
-      exit();
-    }
+    // if(!isset($_SESSION['user_name']))
+    // {
+    //   header('Location: register.php');
+    //   exit();
+    // }
 
     include('database/db.php');
     include('sidebar.php');
@@ -99,7 +99,7 @@
       <thead>
         <tr>
           <th >ID</th>
-          <th >IMAGE</th>
+          <th >PHOTO</th>
           <th>USER NAME</th>
           <th>EMAIL</th>
           <th>PASSWORD</th>
@@ -123,7 +123,8 @@
           <td>".$result['mobile']."</td>
           
           <td>
-            <a href='update_profile.php'> <button type='submit' class='btn btn-success'>UPDATE </button> </a><br><br>
+            <a href='update_profile.php?Id=$result[ID]'> <button class='btn btn-success'>UPDATE </button> </a>
+            <br><br>
              <a href='delete.php'> <button type='submit' class='btn btn-danger'>DELETE </button>
 
           </td>
