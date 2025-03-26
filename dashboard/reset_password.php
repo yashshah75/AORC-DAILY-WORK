@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $token = $_GET['token'];
 
     if (!isset($_GET['token'])) {
-        die("Invalid or missing token!")
+        die("Invalid or missing token!");
     }
 
     // Basic validation
