@@ -5,11 +5,13 @@
   <div class="navbar-wrapper">
     <div class="m-header">
       <a href="" class="b-brand text-primary">
-        <!-- ========   Change your logo from here   ============ -->
-        <img src="images/1.jpg"  alt="logo"  style="width: 70px; height: 70px; display: block !important;">
+        <!-- ========   Change your logo from here   ============ --><br><br>
+        <img src="images/1.jpg"  alt="logo"  style="width: 200px; height: 100px; display: block !important;">
         </a>
     </div>
     <div class="navbar-content">
+    <br>
+    <br>
       <ul class="pc-navbar">
         <li class="pc-item">
           <a href="index.php" class="pc-link">

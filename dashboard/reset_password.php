@@ -5,11 +5,11 @@ include("database/db.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $new_password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
-    $token = $_GET['token'];
-
+    
     if (!isset($_GET['token'])) {
         die("Invalid or missing token!");
     }
+    $token = $_GET['token'];
 
     // Basic validation
     if ($new_password !== $confirm_password) {
@@ -104,12 +104,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div class="form-group mb-3">
               <label class="form-label">Password</label>
-              <input type="email" class="form-control" placeholder="Email Address" name="password">
+              <input type="email" class="form-control" placeholder="Password" name="password">
             </div>
             
             <div class="form-group mb-3">
               <label class="form-label">Confirm Password</label>
-              <input type="text" class="form-control" placeholder="Password" name="confirm_password">
+              <input type="text" class="form-control" placeholder="confirm Password" name="confirm_password">
             </div>
 
             <div class="d-grid mt-4">
