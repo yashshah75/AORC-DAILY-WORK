@@ -1,76 +1,44 @@
-<?php 
-  session_start();
-  include('database/db.php');
+<?php
+session_start();
+include("database/db.php");
 
-  require 'vendor/autoload.php'; // If installed via Composer
-  use PHPMailer\PHPMailer\PHPMailer;
-  use PHPMailer\PHPMailer\Exception;
-  
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $new_password = $_POST['password'];
+    $confirm_password = $_POST['confirm_password'];
+    $token = $_GET['token'];
 
-  if (isset($_POST['pwd_reset'])) {
-    $email = $_POST['email'];
+    if (!isset($_GET['token'])) {
+        die("Invalid or missing token!");
+    }
 
-    // Check if email exists
-    $query = "SELECT * FROM register WHERE email = ?";
-    $stmt = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($stmt, "s", $email);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-    
-    if ($row = mysqli_fetch_assoc($result)) 
-    {
-        // Generate a unique token
-         $token = bin2hex(random_bytes(20));
-
-        // Store token in the database
-        $updateQuery = "UPDATE register SET reset_token=? WHERE email=?";  
-        $stmt = mysqli_prepare($conn, $updateQuery);
+    // Basic validation
+    if ($new_password !== $confirm_password) {
+        echo "<p style='color:red;'> Passwords do not match!</p>";
+    } elseif (strlen($new_password) < 3) {
+        echo "<p style='color:red;'> Password must be at least 5 characters long.</p>";
+    } else {
         
-        if (!$stmt) 
-            die("Update query preparation failed: " . mysqli_error($conn));
+        // Encrypt the new password
+        $hashedpassword = password_hash($new_password, PASSWORD_BCRYPT);
+        $hashed_cpassword = password_hash($hashed_cpassword, PASSWORD_BCRYPT);
+        
+        $query = "UPDATE register SET password=?, confirm_password=?, reset_token=NULL WHERE reset_token=?";
+        $stmt = mysqli_prepare($conn, $query);
+       
+        if (!$stmt)
         {
+            die("Query preparation failed: " . mysqli_error($conn));
         }
-          
-       // $stmt = mysqli_prepare($conn, $updateQuery);
-        mysqli_stmt_bind_param($stmt, "ss", $token, $email);
-        mysqli_stmt_execute($stmt);
+             mysqli_stmt_bind_param($stmt, "sss", $hashedpassword , $hashed_cpassword , $token);
+             mysqli_stmt_execute($stmt);
 
-        // Send reset link to user's email
-        $reset_link = "http://localhost/1. AORC TECHNOLOGIES/PRACTICE/7.crud_html/Mantis-Bootstrap/dashboard/reset_password.php?token=$token";
-
-        $mail = new PHPMailer(true);
-        try 
-        {
-            // Server settings
-            $mail->isSMTP();                                  
-            $mail->Host = 'smtp.gmail.com';  
-            $mail->SMTPAuth = true;                       
-            $mail->Username = 'yashphp.aorc@gmail.com';    
-            $mail->Password = 'lzsfzuncktimswwm';      
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port = 587;                           
-
-            // Recipients
-            $mail->setFrom('yashphp.aorc@gmail.com', 'PHPmailer');
-            $mail->addAddress($email);                  
-
-            // Content
-            $mail->isHTML(true);                         
-            $mail->Subject = 'Password Reset Request';
-            $mail->Body    = "Click the link below to reset your password: <a href='$reset_link'>$reset_link</a>";
-
-            // Send the email
-            $mail->send();
-            echo "<h4 style='color:red;'> Password reset link has been sent to your email.</h4>";
-        } 
-        catch (Exception $e) 
-        {
-            echo "Failed to send email. Mailer Error: {$mail->ErrorInfo}";
+        if (mysqli_stmt_affected_rows($stmt) > 0) {
+            // Redirect to login page with a success flag
+            header("Location: login.php?reset=success");
+            exit();
+        } else {
+            echo "<p> Invalid or expired token!</p>";
         }
-    } 
-    else 
-    {
-        echo "Email not found!";
     }
 }
 ?>
@@ -113,7 +81,7 @@
 <!-- [Body] Start -->
 
 <body>
-<form action="#" method="POST">
+<form method="POST">
   <!-- [ Pre-loader ] start -->
   <div class="loader-bg">
     <div class="loader-track">
@@ -131,22 +99,21 @@
         <div class="card my-5">
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-end mb-4">
-              <h3 class="mb-0"><b>Forgot Password</b></h3>
+              <h3 class="mb-0"><b>RESET PASSWORD</b></h3>
               <a href="register.php" class="link-primary">Don't have an account?</a>
             </div>
             <div class="form-group mb-3">
-              <label class="form-label">Email Address</label>
-              <input type="email" class="form-control" placeholder="Email Address" name="email">
-            </div>
-            <!-- <div class="form-group mb-3">
               <label class="form-label">Password</label>
-              <input type="password" class="form-control" placeholder="Password">
-            </div> -->
-            <!-- <div class="d-flex mt-1 justify-content-between">
-              <a href="forgot"><h5 class="text-secondary f-w-400">Forgot Password?</h5></a>
-            </div> -->
+              <input type="email" class="form-control" placeholder="Email Address" name="password">
+            </div>
+            
+            <div class="form-group mb-3">
+              <label class="form-label">Confirm Password</label>
+              <input type="text" class="form-control" placeholder="Password" name="confirm_password">
+            </div>
+
             <div class="d-grid mt-4">
-              <button type="submit" class="btn btn-primary" name="pwd_reset">SEND</button><br>
+              <button type="submit" class="btn btn-primary" name="submit">RESET</button><br>
               <a href="login.php">Back</a>
             </div>
 			</div>
@@ -199,8 +166,8 @@
   
   <script>font_change("Public-Sans");</script>
   
-</form>
- 
+    
+  </form>
 </body>
 <!-- [Body] end -->
 

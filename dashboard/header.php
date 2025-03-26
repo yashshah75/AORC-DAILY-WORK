@@ -144,8 +144,8 @@
                                             </h6>
                   <span>UI/UX Designer</span>
                 </div>
-                <a href="login.php" class="pc-head-link bg-transparent"><i class="ti ti-power text-danger"></i></a>
               </div>
+              <a href="login.php" class="pc-head-link bg-transparent"><i class="ti ti-power text-danger"></i></a>
             </div>
             <ul class="nav drp-tabs nav-fill nav-tabs" id="mydrpTab" role="tablist">
               <li class="nav-item" role="presentation">
