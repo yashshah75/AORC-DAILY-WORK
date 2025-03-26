@@ -6,7 +6,7 @@ $_SESSION["user_name"] = "Yash";
 
 echo $_SESSION["user_name"];
 
-// session_unset();
+session_unset();
 
-// echo $_SESSION["user_name"];
+echo $_SESSION["user_name"];
 ?>      
