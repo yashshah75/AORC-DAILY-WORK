@@ -21,6 +21,59 @@
   $result = mysqli_fetch_assoc($data);
 ?>
 
+
+<?php 
+  if(isset($_POST['update']))
+  {
+    $folder = $result['photo'];
+    $username = trim($_POST['username']);
+    $email = trim($_POST['email']);
+    $phone = trim($_POST['mobile']);
+    if (!empty($_FILES['photo']['name'])) {
+      $filename = $_FILES['photo']['name'];
+      $tempname = $_FILES['photo']['tmp_name'];
+      $folder = "images/".$filename;
+      
+      if(!move_uploaded_file($tempname, $folder))
+      {
+          die("File Upload Failed");
+      }
+  }
+
+      if(empty($username) || empty($email) || empty($phone)) {
+          die("All fields are required!");
+      }
+
+      if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+          die("Invalid email format!");
+      }
+
+
+      $query = "UPDATE register SET photo = '$folder', username='$username', email='$email', mobile='$phone' WHERE id='$uid'";
+
+        $data = mysqli_query($conn,$query);
+    
+        if(!$data)
+        {
+            echo "Record not Updated";
+        }
+        else
+        {   
+        ?>
+          <meta http-equiv = "refresh" content = "2; url = http://localhost/1.%20AORC%20TECHNOLOGIES/PRACTICE/7.crud_html/Mantis-Bootstrap/dashboard/index.php" />
+        
+        <?php
+            echo "";
+            
+            $message = "Record Updated Successfully!";
+            echo "<div style='padding: 10px; background-color: green; color: white; text-align: center;'>$message</div>";
+        }
+
+    }
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <!-- [Head] start -->
@@ -356,54 +409,3 @@
 
 
 
-<?php 
-  if(isset($_POST['update']))
-  {
-    $folder = $result['photo'];
-    $username = trim($_POST['username']);
-    $email = trim($_POST['email']);
-    $phone = trim($_POST['mobile']);
-    if (!empty($_FILES['photo']['name'])) {
-      $filename = $_FILES['photo']['name'];
-      $tempname = $_FILES['photo']['tmp_name'];
-      $folder = "images/".$filename;
-      
-      if(!move_uploaded_file($tempname, $folder))
-      {
-          die("File Upload Failed");
-      }
-  }
-
-      if(empty($username) || empty($email) || empty($phone)) {
-          die("All fields are required!");
-      }
-
-      if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-          die("Invalid email format!");
-      }
-
-
-      $query = "UPDATE register SET photo = '$folder', username='$username', email='$email', mobile='$phone' WHERE id='$uid'";
-
-        $data = mysqli_query($conn,$query);
-    
-        if(!$data)
-        {
-            echo "Record not Updated";
-        }
-        else
-        {   
-        ?>
-          <meta http-equiv = "refresh" content = "2; url = http://localhost/1.%20AORC%20TECHNOLOGIES/PRACTICE/7.crud_html/Mantis-Bootstrap/dashboard/index.php" />
-        
-        <?php
-            echo "";
-            
-            $message = "Record Updated Successfully!";
-            echo "<div style='padding: 10px; background-color: green; color: white; text-align: center;'>$message</div>";
-        }
-
-    }
-
-
-?>

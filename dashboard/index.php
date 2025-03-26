@@ -125,7 +125,7 @@
           <td>
             <a href='update_profile.php?id=$result[ID]'> <button class='btn btn-success'>UPDATE </button> </a>
             <br><br>
-             <a href='delete.php'?id=$result[ID]'> <button type='submit' class='btn btn-danger'>DELETE </button>
+             <a href='delete.php?id=$result[ID]'> <button class='btn btn-danger'>DELETE </button>
 
 
           </td>
