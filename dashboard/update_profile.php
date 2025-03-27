@@ -59,14 +59,14 @@
         }
         else
         {   
-        ?>
-          <meta http-equiv = "refresh" content = "2; url = http://localhost/1.%20AORC%20TECHNOLOGIES/PRACTICE/7.crud_html/Mantis-Bootstrap/dashboard/index.php" />
+          ?>
+        <meta http-equiv = "refresh" content = "10; url = http://localhost/1.%20AORC%20TECHNOLOGIES/PRACTICE/7.crud_html/Mantis-Bootstrap/dashboard/index.php" />
         
         <?php
-            echo "";
-            
-            $message = "Record Updated Successfully!";
-            echo "<div style='padding: 10px; background-color: green; color: white; text-align: center;'>$message</div>";
+            // echo "";
+          
+        $message = "Record Updated Successfully!";
+        echo "<div style='padding: 10px; background-color: green; color: white; text-align: center;'>$message</div>";
         }
 
     }
@@ -210,7 +210,7 @@
   
   
   
-  <script>change_box_container('false');</script>
+  <script>change_box_container('false');       </script>
   
   
   
