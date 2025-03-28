@@ -6,7 +6,7 @@
     <div class="m-header">
       <a href="" class="b-brand text-primary">
         <!-- ========   Change your logo from here   ============ --><br><br>
-        <img src="images/1.jpg"  alt="logo"  style="width: 200px; height: 100px; display: block !important;">
+        <img src="images/1.jpg"  alt="logo"  style="width: 120px; height: 100px; margin-top:10px; margin-left:40px; display: block !important;">
         </a>
     </div>
     <div class="navbar-content">

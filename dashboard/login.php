@@ -4,6 +4,7 @@
 ?>
 
 <?php
+
 if(isset($_POST['login']))
       {
         $username = trim($_POST['email']);
