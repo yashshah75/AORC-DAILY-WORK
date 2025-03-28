@@ -109,6 +109,7 @@
         </tr>
       </thead>
       <tbody>
+        
 <?php 
 // error_reporting(0);
     while($result = mysqli_fetch_assoc($data))
