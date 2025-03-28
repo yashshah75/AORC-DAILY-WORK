@@ -43,7 +43,17 @@
       if (!preg_match('/^(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{5,}$/', $password)) 
       {        
           die("Password is not in correct format");
-      }    
+      }  
+      
+      // Validate phone number (allowing country code with optional + sign, and 10-15 digits)
+      if (!preg_match('/^\+?[0-9]{10,15}$/', $phone)) {
+          die("<p style='color:red;'>Invalid phone number format! (10-15 digits, optional + at the start).</p>");
+      }
+
+      if (strlen($username) < 3) {
+        die("<p style='color:red;'>Username must be at least 3 characters long.</p>");
+    }
+
         
       if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         die("Invalid email format!");
@@ -185,7 +195,7 @@
             <div class="col-md-12">
               <div class="form-group mb-3">
                 <label class="form-label">Username</label>
-                <input type="text" class="form-control" placeholder="Enter Your Username" name="username" Required>
+                <input type="text" class="form-control" placeholder="Enter Your Username" name="username" minlength="3" Required>
               </div>
             </div>
             
@@ -211,15 +221,15 @@
                 <div class="form-group mb-3">
                   <label class="form-label">Confirm Password</label>
                   <input type="password" class="form-control" placeholder="Confirm Password" name="confirm_password" Required>
-                  <span style="color:red";> Password should be in this format: Abc@123</span>
-                  <span style="color:red";> Password must be at least 5 characters long</span>
+
                 </div>
             </div>
 
             <div class="col-md-12">
               <div class="form-group mb-3">
                 <label class="form-label">Phone Number</label>
-                <input type="tel" class="form-control" placeholder="Mobile should be 10 digits" name="mobile" Required>
+                <input type="tel" class="form-control" placeholder="Mobile should be 10 digits, optional + at the start" name="mobile" Required>
+                <!-- <span style="color:red;">Invalid phone number format!</span> -->
               </div>
             </div>
 

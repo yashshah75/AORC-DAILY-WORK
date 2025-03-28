@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($new_password !== $confirm_password) {
         echo "<p style='color:red;'> Passwords do not match!</p>";
     } elseif (strlen($new_password) < 3) {
-        echo "<p style='color:red;'> Password must be at least 5 characters long.</p>";
+        echo "<p style='color:red;'> Password must be at least 3 characters long.</p>";
     } else {
         
         // Encrypt the new password
@@ -104,12 +104,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div class="form-group mb-3">
               <label class="form-label">Password</label>
-              <input type="email" class="form-control" placeholder="Password" name="password">
+              <input type="email" class="form-control" placeholder="Password must be at least 5 characters long" name="password">
             </div>
             
             <div class="form-group mb-3">
               <label class="form-label">Confirm Password</label>
-              <input type="text" class="form-control" placeholder="confirm Password" name="confirm_password">
+              <input type="text" class="form-control" placeholder="Re-enter your password" name="confirm_password">
             </div>
 
             <div class="d-grid mt-4">

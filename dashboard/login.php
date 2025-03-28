@@ -9,9 +9,9 @@ if(isset($_POST['login']))
         $username = trim($_POST['email']);
         $password = trim($_POST['password']);
         
-        $query = "SELECT password FROM register WHERE email = ?";        
+        $query = "SELECT password FROM register WHERE username = ? OR email = ?";        
         $stmt = mysqli_prepare($conn, $query);
-        mysqli_stmt_bind_param($stmt, "s", $username);
+        mysqli_stmt_bind_param($stmt, "ss", $username, $username);
         // mysqli_stmt_bind_param($stmt, "ss", $username, $username);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
