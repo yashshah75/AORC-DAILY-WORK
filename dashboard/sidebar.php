@@ -48,17 +48,17 @@
           <i class="ti ti-news"></i>
         </li>
         <li class="pc-item">
-          <a href="login.php" class="pc-link">
+          <a href="register.php" class="pc-link">
             <span class="pc-micon"><i class="ti ti-lock"></i></span>
-            <span class="pc-mtext">Login</span>
+            <span class="pc-mtext">New Register</span>
           </a>
         </li>
-        <li class="pc-item">
+        <!-- <li class="pc-item">
           <a href="register.php" class="pc-link">
             <span class="pc-micon"><i class="ti ti-user-plus"></i></span>
             <span class="pc-mtext">Register</span>
           </a>
-        </li>
+        </li> -->
       </ul>
       
     </div>
