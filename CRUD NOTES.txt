@@ -1,0 +1,7 @@
+1. (?) -> this is a place holder which is used for dynamic input
+
+2. mysqli_prepare() -> it is a function which is used to create a prepared statements and execute it dynamically and send data to the database.
+
+3. bind_param() -> it is used to replace the placeholder(?) with the actual query
+
+4. 
