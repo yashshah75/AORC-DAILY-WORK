@@ -1,6 +1,6 @@
 <?php 
   session_start();
-  include('database/db.php');
+  include('database/db.php')
 
   require 'vendor/autoload.php'; // If installed via Composer
   use PHPMailer\PHPMailer\PHPMailer;
