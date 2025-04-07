@@ -2,6 +2,9 @@
 session_start();
 
 $_SESSION["user_name"] = "Yash";
+// $_SESSION['photo'] = "user-image";
+$_SESSION['user_photo'] = $user['photo']; // Save image file name in session
+
 
 // echo $_SESSION["user_name"];
 
