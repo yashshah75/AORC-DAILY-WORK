@@ -12,8 +12,11 @@
 
  mysqli_stmt_execute($variable_name)
 
-5. 
+5. mysqli_fetch_assoc() -> Returns an associative array.
 
+6. preg_match() ->  returns whether a match was found in a string.
+
+7. 
 
 
 
