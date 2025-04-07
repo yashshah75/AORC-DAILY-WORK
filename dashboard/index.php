@@ -93,7 +93,7 @@
           </div>
         </div>
         <a href="newpost.php">
-          <button class="btn btn-primary">NEW POPST</button>
+          <button class="btn btn-primary">NEW POST</button>
         </a>
       </div>
 
