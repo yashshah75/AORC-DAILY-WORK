@@ -64,58 +64,62 @@
   <!-- [ Pre-loader ] start -->
   <div class="loader-bg">
     <div class="loader-track">
-      <div class="loader-fill"></div>
+        <div class="loader-fill">
+            </div>
+        </div>
     </div>
-  </div>
-
-
-
-  <!-- [ Pre-loader ] End -->
-  <!-- [ Sidebar Menu ] end --> <!-- [ Header Topbar ] start -->
-  <!-- [ Main Content ] start -->
-  <div class="pc-container">
-    <div class="pc-content">
-      <!-- [ Main Content ] start -->
-
-
-      <!-- =============================================================================================== -->
-                                        <!-- CRUD TABLE  -->
-      <!-- =============================================================================================== -->
-      <table style="text-align: center" class="table table-bordered">
-      <thead><th colspan="7" style="font-size:30px">ALL THE POST</th>
-        <tr>
-          <th>ID</th>
-          <th>Post_title</th>
-          <th>post_Description</th>
-          <th>Created at</th>
-          <th>Updated at</th>
-          <th>IMAGE</th>
-          <th>ACTIONS</th>
-          
-        </tr>
-      </thead>
-      <tbody>
-        
-<?php 
-// error_reporting(0);
-    while($result = mysqli_fetch_assoc($data))
-    {
-        echo "<tr>
-          <td>".$result['id']."</td>
-          <td>".$result['post_title']."</td>
-          <td>".$result['post_description']."</td>
-          <td>".$result['created_at']."</td>
-          <td>".$result['updated_at']."</td>
-          <td><img src = '".$result['image']."' height='50px' width='50px' alt='image'></td>
-          <td>
-            <a href='update_post.php?id=$result[id]'> <button class='btn btn-success'>UPDATE </button> </a>
+    
+    
+    
+    <!-- [ Pre-loader ] End -->
+    <!-- [ Sidebar Menu ] end --> <!-- [ Header Topbar ] start -->
+    <!-- [ Main Content ] start -->
+    <div class="pc-container">
+        <div class="pc-content">
             
-             <a href='delete_post.php?id=$result[id]'> <button class='btn btn-danger'>DELETE </button>
+            <!-- [ Main Content ] start -->
+            
+            <!-- =============================================================================================== -->
+            <!-- CRUD TABLE  -->
+            <!-- =============================================================================================== -->
+            <a href="newpost.php">
+                  <button class="btn btn-primary" style="margin-left:1100px; margin-bottom:10px">NEW POST</button>
+                </a>
+            <table style="text-align: center" class="table table-bordered">
+                <thead><th colspan="7" style="font-size:30px">ALL THE POST</th>
+                <tr>
+                    <th>ID</th>
+                    <th>Post_title</th>
+                    <th>post_Description</th>
+                    <th>Created at</th>
+                    <th>Updated at</th>
+                    <th>IMAGE</th>
+                    <th>ACTIONS</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                
+                <?php 
+// error_reporting(0);
+while($result = mysqli_fetch_assoc($data))
+{
+    echo "<tr>
+    <td>".$result['id']."</td>
+    <td>".$result['post_title']."</td>
+    <td>".$result['post_description']."</td>
+    <td>".$result['created_at']."</td>
+    <td>".$result['updated_at']."</td>
+    <td><img src = '".$result['image']."' height='50px' width='50px' alt='image'></td>
+    <td>
+    <a href='update_post.php?id=$result[id]'> <button class='btn btn-success'>UPDATE </button> </a>
+    
+    <a href='delete_post.php?id=$result[id]'> <button class='btn btn-danger'>DELETE </button>
 
-
-          </td>
-        </tr>";
-        // echo "<br>";
+    
+    </td>
+    </tr>";
+    // echo "<br>";
     }
     }
 

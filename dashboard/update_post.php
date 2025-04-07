@@ -3,18 +3,6 @@
   require_once('database/db.php');
   $uid = $_GET['id'];
 
-  // $user_profile = $_SESSION['user_name'];
-
-  // if($use_profile == true)
-  // {
-
-  // }
-  // else
-  // {
-  //   header('Location: login.php');
-
-  // }
-
   $query = "SELECT * FROM post WHERE ID='$uid'";
   $data = mysqli_query($conn, $query);
 
