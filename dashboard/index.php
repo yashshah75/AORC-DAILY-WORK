@@ -105,7 +105,6 @@
           <th >PHOTO</th>
           <th>USER NAME</th>
           <th>EMAIL</th>
-          
           <th>MOBILE</th>
           <th>ACTIONS</th>
         </tr>
