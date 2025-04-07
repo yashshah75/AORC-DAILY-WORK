@@ -1,7 +1,22 @@
 1. (?) -> this is a place holder which is used for dynamic input
 
 2. mysqli_prepare() -> it is a function which is used to create a prepared statements and execute it dynamically and send data to the database.
+-> Also it is used to reduce the execution Time
+
+	Syntax: mysqli_prepare($conn, $query)
 
 3. bind_param() -> it is used to replace the placeholder(?) with the actual query
+-> binds the parameters to the SQL query and tells the database what the parameters are.
 
-4. 
+4.  mysqli_stmt_execute() -> it is used to execute or Run the prepared statements which is created in mysqli_prepare() function.
+
+ mysqli_stmt_execute($variable_name)
+
+5. 
+
+
+
+
+
+
+
