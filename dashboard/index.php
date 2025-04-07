@@ -7,7 +7,9 @@
       header('Location: login.php');
       exit();
     }
+?>
 
+<?php 
     include('database/db.php');
     include('sidebar.php');
     include('header.php');
