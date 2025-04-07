@@ -43,7 +43,7 @@
           </a>
         </li> -->
 
-        <li class="pc-item pc-caption">
+        <!-- <li class="pc-item pc-caption">
           <label>Pages</label>
           <i class="ti ti-news"></i>
         </li>
@@ -52,7 +52,7 @@
             <span class="pc-micon"><i class="ti ti-lock"></i></span>
             <span class="pc-mtext">New Post</span>
           </a>
-        </li>
+        </li> -->
         <!-- <li class="pc-item">
           <a href="register.php" class="pc-link">
             <span class="pc-micon"><i class="ti ti-user-plus"></i></span>

@@ -87,11 +87,14 @@
               <ul class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.php">Home</a></li>
                 <li class="breadcrumb-item"><a href="javascript: void(0)">Dashboard</a></li>
-                <li class="breadcrumb-item" aria-current="page">Home</li>
+                <!-- <li class="breadcrumb-item" aria-current="page">Home</li> -->
               </ul>
             </div>
           </div>
         </div>
+        <a href="register.php">
+          <button class="btn btn-primary">NEW POPST</button>
+        </a>
       </div>
 
 
