@@ -20,7 +20,7 @@
     if ($row = mysqli_fetch_assoc($result)) 
     {
         // Generate a unique token
-         $token = bin2hex(random_bytes(50));
+         $token = bin2hex(random_bytes(20));
 
         // Store token in the database
         $updateQuery = "UPDATE register SET reset_token=? WHERE email=?";  
