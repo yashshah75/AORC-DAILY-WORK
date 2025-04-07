@@ -2,7 +2,7 @@
   // session_start();
   require_once('database/db.php');
 
-  if(isset($_POST['new_post']))
+  if(isset($_POST['add_post']))
   {
     $allowed_extensions = ['jpg', 'jpeg', 'png'];
 
@@ -126,13 +126,13 @@
             <div class="col-md-12">
               <div class="form-group mb-3">
                 <label class="form-label">Post Title</label>
-                <input type="text" class="form-control" placeholder="Enter Your Username" name="username" minlength="3" Required>
+                <input type="text" class="form-control" placeholder="Enter Your Username" name="post_title" minlength="3" Required>
               </div>
             </div>
             
             <div class="form-group mb-3">
               <label class="form-label">Post Description</label>    
-              <input type="text" class="form-control" placeholder="Description" name="description" Required>
+              <input type="text" class="form-control" placeholder="Description" name="post_description" Required>
 
             </div>
             
