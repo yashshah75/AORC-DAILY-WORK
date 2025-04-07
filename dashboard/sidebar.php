@@ -18,47 +18,12 @@
             <span class="pc-micon"><i class="ti ti-dashboard"></i></span>
             <span class="pc-mtext">Dashboard</span>
           </a>
-        </li>
-
-        <!-- <li class="pc-item pc-caption">
-          <label>UI Components</label>
-          <i class="ti ti-dashboard"></i>
-        </li>
-        <li class="pc-item">
-          <a href="https://themewagon.github.io/Mantis-Bootstrap/elements/bc_typography.html" class="pc-link">
-            <span class="pc-micon"><i class="ti ti-typography"></i></span>
-            <span class="pc-mtext">Typography</span>
+        <br>
+          <a href="allpost.php" class="pc-link">
+            <span class="pc-micon"><i class="ti ti-dashboard"></i></span>
+            <span class="pc-mtext">All Post</span>
           </a>
         </li>
-        <li class="pc-item">
-          <a href="https://themewagon.github.io/Mantis-Bootstrap/elements/bc_color.html" class="pc-link">
-            <span class="pc-micon"><i class="ti ti-color-swatch"></i></span>
-            <span class="pc-mtext">Color</span>
-          </a>
-        </li>
-        <li class="pc-item">
-          <a href="https://themewagon.github.io/Mantis-Bootstrap/elements/icon-tabler.html" class="pc-link">
-            <span class="pc-micon"><i class="ti ti-plant-2"></i></span>
-            <span class="pc-mtext">Icons</span>
-          </a>
-        </li> -->
-
-        <!-- <li class="pc-item pc-caption">
-          <label>Pages</label>
-          <i class="ti ti-news"></i>
-        </li>
-        <li class="pc-item">
-          <a href="register.php" class="pc-link">
-            <span class="pc-micon"><i class="ti ti-lock"></i></span>
-            <span class="pc-mtext">New Post</span>
-          </a>
-        </li> -->
-        <!-- <li class="pc-item">
-          <a href="register.php" class="pc-link">
-            <span class="pc-micon"><i class="ti ti-user-plus"></i></span>
-            <span class="pc-mtext">Register</span>
-          </a>
-        </li> -->
       </ul>
       
     </div>
