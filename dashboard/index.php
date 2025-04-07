@@ -105,8 +105,7 @@
           <th >PHOTO</th>
           <th>USER NAME</th>
           <th>EMAIL</th>
-          <th>PASSWORD</th>
-          <th>CONFIRM_PASSWORD</th>
+          
           <th>MOBILE</th>
           <th>ACTIONS</th>
         </tr>
@@ -122,8 +121,7 @@
           <td><img src = '".$result['photo']."' height='50px' width='50px' alt='image'></td>
           <td>".$result['username']."</td>
           <td>".$result['email']."</td>
-          <td>".$result['password']."</td>
-          <td>".$result['confirm_password']."</td>
+          
           <td>".$result['mobile']."</td>
           
           <td>

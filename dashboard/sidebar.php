@@ -50,7 +50,7 @@
         <li class="pc-item">
           <a href="register.php" class="pc-link">
             <span class="pc-micon"><i class="ti ti-lock"></i></span>
-            <span class="pc-mtext">New Register</span>
+            <span class="pc-mtext">New Post</span>
           </a>
         </li>
         <!-- <li class="pc-item">

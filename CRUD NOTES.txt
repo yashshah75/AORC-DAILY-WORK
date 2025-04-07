@@ -19,6 +19,13 @@
 7. 
 
 
+id
+title
+description
+image
+created at
+updated at
+
 
 
 
