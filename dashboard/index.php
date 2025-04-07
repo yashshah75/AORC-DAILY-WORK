@@ -92,7 +92,7 @@
             </div>
           </div>
         </div>
-        <a href="register.php">
+        <a href="newpost.php">
           <button class="btn btn-primary">NEW POPST</button>
         </a>
       </div>

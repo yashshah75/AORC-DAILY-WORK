@@ -16,7 +16,8 @@
 
 6. preg_match() ->  returns whether a match was found in a string.
 
-7. 
+7. diff between varchar and text type in sql:
+ans : VARCHAR is best suited for storing short to medium-length strings, while TEXT is better suited for storing large amounts of textual data
 
 
 id

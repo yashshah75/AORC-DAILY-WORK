@@ -45,7 +45,7 @@
               else {
                 echo "<span>Guest</span>"; // Default text if the user is not logged in
                     } ?>
-                    
+
           </div>
         </li>
         <li class="dropdown pc-h-item header-user-profile">
