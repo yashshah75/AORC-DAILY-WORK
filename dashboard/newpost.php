@@ -93,15 +93,15 @@
             
             <div class="form-group mb-3">
               <label class="form-label">description</label>
-              <input type="text" class="form-control" placeholder="Password" name="password" Required>
+              <input type="text" class="form-control" placeholder="description" name="description" Required>
               <span style="color:red";> Password should be in this format: Abc@123 <br>
                Password must be at least 5 characters long</span>
             </div>
 
             <div class="col-md-12">
                 <div class="form-group mb-3">
-                  <label class="form-label">Confirm Password</label>
-                  <input type="password" class="form-control" placeholder="Confirm Password" name="confirm_password" Required>
+                  <label class="form-label"></label>
+                  <input type="text" class="form-control" placeholder="Confirm Password" name="" Required>
 
                 </div>
             </div>
