@@ -1,3 +1,30 @@
+
+
+
+
+
+<?php
+include('database/db.php');
+ 
+$userImage = '1.jpg'; // fallback image
+if (isset($_SESSION['email'])) {
+    $email = $_SESSION['email'];
+ 
+    $query = "SELECT photo FROM register WHERE email = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "s", $email);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+ 
+    if ($row = mysqli_fetch_assoc($result)) {
+        if (!empty($row['photo'])) {
+            $userImage = $row['photo'];
+        }
+    }
+}
+?>
+
+
 <header class="pc-header">
   <div class="header-wrapper">
     <div class="me-auto pc-mob-drp">
@@ -50,7 +77,7 @@
         </li>
         <li class="dropdown pc-h-item header-user-profile">
           <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" data-bs-auto-close="outside" aria-expanded="false">
-            <img src="../assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar">
+            <img src="../dashboard/images/<?php echo $userImage; ?>" alt="user-image" class="user-avtar">
             <?php if (isset($_SESSION['user_name'])) {
                 echo "<span>".$_SESSION['user_name']."</span>";}
               else {
@@ -62,7 +89,8 @@
             <div class="dropdown-header">
               <div class="d-flex mb-1">
                 <div class="flex-shrink-0">
-                  <img src="../assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar wid-35">
+                  <!-- <img src="../assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar wid-35"> -->
+                  <img src="../dashboard/images/<?php echo $userImage; ?>" alt="user-image" class="user-avtar wid-35">
                 </div>
                 <div class="flex-grow-1 ms-3">
                   <h6 class="mb-1"><?php if (isset($_SESSION['user_name']))

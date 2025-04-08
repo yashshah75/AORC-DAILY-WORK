@@ -31,6 +31,7 @@ updated at
 ==========================
 07/04/25: [YASH]
 ==========================
-1) Completed CRUD in POST [Add (With Current time), Update (With Current time), Delete Post]
+1) Watch 8 video learn WordPress 
+
 
 
