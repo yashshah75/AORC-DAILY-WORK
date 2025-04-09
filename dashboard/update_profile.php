@@ -29,6 +29,7 @@
     $username = trim($_POST['username']);
     $email = trim($_POST['email']);
     $phone = trim($_POST['mobile']);
+    
     if (!empty($_FILES['photo']['name'])) {
       $filename = $_FILES['photo']['name'];
       $tempname = $_FILES['photo']['tmp_name'];
