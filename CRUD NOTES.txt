@@ -33,5 +33,24 @@ updated at
 ==========================
 1) Watch 8 video of WordPress 
 
+======================
+09/04/25: [YASH]
+======================
+1) Watch 9 to 12 video of WordPress and do practice
+
+
+
+======================
+11/04/25: [YASH]
+======================
+-> Learned:
+	1) How to Activate Theme
+	2) How to Create Pages, Post, Menu, Pagination in post
+	3) How to create Categories, Subcategories
+	4) How to Add comments, Remove in Trash, Delete Permanently, How to Approve Comment.
+	5) How to Create or Change Permalink(Slug or URL)
+	6) How to Create Separated Page For Only Post
+	7) How to Customize Excerpt 
+	8) How to Add widgets
 
 
