@@ -4,6 +4,9 @@
 
   if(isset($_POST['register']))
   {
+    // if(isset($_POST[login()]))
+    // {
+
     $allowed_extensions = ['jpg', 'jpeg', 'png'];
 
       // Get the file name and extension
@@ -113,6 +116,7 @@
       // header("Location:login.php");
       // echo "SUBMITTED";
   }
+// }
 
 ?>
 
@@ -150,17 +154,6 @@
 <link rel="stylesheet" href="../assets/css/style.css" id="main-style-link" >
 <link rel="stylesheet" href="../assets/css/style-preset.css" >
 
-<script src="https://www.google.com/recaptcha/api.js"></script>
-<script>
-   function onSubmit(token) {
-     document.getElementById("demo-form").submit();
-   }
- </script>
-
-<button class="g-recaptcha" 
-        data-sitekey="reCAPTCHA_site_key" 
-        data-callback='onSubmit' 
-        data-action='submit'>Submit</button>
 </head>
 <!-- [Head] end -->
 <!-- [Body] Start -->
@@ -246,7 +239,7 @@
 
             <!-- <p class="mt-4 text-sm text-muted">By Signing up, you agree to our <a href="#" class="text-primary"> Terms of Service </a> and <a href="#" class="text-primary"> Privacy Policy</a></p> -->
             <div class="d-grid mt-3">
-              <button type="submit" class="btn btn-primary" name="register">Register</button>
+              <button type="submit" class="btn btn-primary" name="register" onclick="login()">Register</button>
             </div>
             <!-- <div class="saprator mt-3">
               <span>Sign up with</span>
@@ -301,6 +294,15 @@
 
   
   <!-- [ Main Content ] end -->
+
+  <!-- Required library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- Bootstrap theme -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- reCAPTCHA v3 js -->
+<script src="https://www.google.com/recaptcha/api.js?render=6Lee9BUrAAAAAInY31Ba8PEpZ1vedCuWARp-zw6v"></script>
+
   <!-- Required Js -->
   <script src="../assets/js/plugins/popper.min.js"></script>
   <script src="../assets/js/plugins/simplebar.min.js"></script>
@@ -509,6 +511,45 @@
   </div>
 </div> -->
 </body>
+
+
+
+<script>
+  function login() {
+    grecaptcha.ready(function() {
+      grecaptcha.execute('6Lee9BUrAAAAAInY31Ba8PEpZ1vedCuWARp-zw6v', {
+        action: 'submit'
+      }).then(function(token) {
+        // Add your logic to submit to your backend server here.
+        var email = $("#email").val();
+        var password = $("#password").val();
+        console.log(email);
+        console.log(password);
+        console.log(token);
+        $.ajax({
+          url: "register_check.php",
+          type: "POST",
+          dataType: 'json',
+          data: {
+            email: email,
+            password: password,
+            token: token
+          },
+          success: function(response) {
+            if (response.status == true) {
+              alert(response.msg);
+            } else {
+              alert(response.msg);
+            }
+          },
+          error: function(xhr, status) {
+            console.log('ajax error = ' + xhr.statusText);
+          }
+        });
+      });
+    });
+  }
+</script>
 <!-- [Body] end -->
 </html>
 
