@@ -73,8 +73,15 @@ if(isset($_POST['login']))
 <link rel="stylesheet" href="../assets/css/style.css" id="main-style-link" >
 <link rel="stylesheet" href="../assets/css/style-preset.css" >
 
+<!-- ================================================ RECAPTCHA ========================================================= -->
 
-
+<!-- Required library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- Bootstrap theme -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- reCAPTCHA v3 js -->
+<script src="https://www.google.com/recaptcha/api.js?render=6Lee9BUrAAAAAInY31Ba8PEpZ1vedCuWARp-zw6v"></script>
 
 </head>
 <!-- [Head] end -->
@@ -126,7 +133,7 @@ if(isset($_POST['login']))
             </div>
 
             <div class="d-grid mt-4">
-              <button type="submit" class="btn btn-primary" name="login">Login</button>
+              <button type="submit" class="btn btn-primary" name="login" onlick="login()">Login</button>
             </div>
       
 			<!-- <div class="saprator mt-3">
@@ -212,7 +219,42 @@ if(isset($_POST['login']))
 
 </body>
 <!-- [Body] end -->
-
+<script>
+  function login() {
+    grecaptcha.ready(function() {
+      grecaptcha.execute('6Lee9BUrAAAAAInY31Ba8PEpZ1vedCuWARp-zw6v', {
+        action: 'submit'
+      }).then(function(token) {
+        // Add your logic to submit to your backend server here.
+        var email = $("#email").val();
+        var password = $("#password").val();
+        console.log(email);
+        console.log(password);
+        console.log(token);
+        $.ajax({
+          url: "register_check.php",
+          type: "POST",
+          dataType: 'json',
+          data: {
+            email: email,
+            password: password,
+            token: token
+          },
+          success: function(response) {
+            if (response.status == true) {
+              alert(response.msg);
+            } else {
+              alert(response.msg);
+            }
+          },
+          error: function(xhr, status) {
+            console.log('ajax error = ' + xhr.statusText);
+          }
+        });
+      });
+    });
+  }
+</script>
 
 <!-- Mirrored from themewagon.github.io/Mantis-Bootstrap/pages/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 20 Mar 2025 06:40:54 GMT -->
 </html>
