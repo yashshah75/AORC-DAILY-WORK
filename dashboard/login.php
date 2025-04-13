@@ -120,12 +120,12 @@ if(isset($_POST['login']))
             
             <div class="form-group mb-3">
               <label class="form-label">Email or Username</label>
-              <input type="text" class="form-control" placeholder="Enter your User name or Email" name="email" required>
+              <input type="text" class="form-control" placeholder="Enter your User name or Email" name="email" id="email" required>
             </div>
 
             <div class="form-group mb-3">
               <label class="form-label">Password</label>
-              <input type="password" class="form-control" placeholder="Password" name="password" required>
+              <input type="password" class="form-control" placeholder="Password" name="password" id="password" required>
             </div>
 
             <div class="d-flex mt-1 justify-content-between">
@@ -133,7 +133,7 @@ if(isset($_POST['login']))
             </div>
 
             <div class="d-grid mt-4">
-              <button type="submit" class="btn btn-primary" name="login" onlick="login()">Login</button>
+              <button type="submit" class="btn btn-primary" name="login" onclick="login()">Login</button>
             </div>
       
 			<!-- <div class="saprator mt-3">
@@ -232,7 +232,7 @@ if(isset($_POST['login']))
         console.log(password);
         console.log(token);
         $.ajax({
-          url: "register_check.php",
+          url: "login_check.php",
           type: "POST",
           dataType: 'json',
           data: {

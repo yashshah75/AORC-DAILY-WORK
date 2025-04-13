@@ -1,11 +1,12 @@
 <?php
+include('login.php');
 $email = $_POST['email'];
 $password = $_POST['password'];
 $token = $_POST['token'];
 
 // call curl to POST request 
 $ch = curl_init();
-curl_setopt($ch, CURLOPT_URL,"https://www.google.com/recaptcha/api/siteverify");
+curl_setopt($ch, CURLOPT_URL,"https://www.google.com/recaptcha/api/siteverify?secret=$secretKey&response=$recaptchaToken");
 curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(array('secret' => '6Lee9BUrAAAAAN1Cjo55KYoVAhbnCuQxKlJWrvHs', 'response' => $token)));
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
