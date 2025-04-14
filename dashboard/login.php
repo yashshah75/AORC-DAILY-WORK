@@ -1,4 +1,3 @@
-
 <?php 
   session_start();
   include("database/db.php"); // include database connection
@@ -60,7 +59,7 @@ if(isset($_POST['login']))
   <meta name="author" content="CodedThemes">
 
   <!-- [Favicon] icon -->
-<link rel="icon" href="https://themewagon.github.io/Mantis-Bootstrap/assets/images/favicon.svg" type="image/x-icon"> <!-- [Google Font] Family -->
+  <link rel="icon" href="https://themewagon.github.io/Mantis-Bootstrap/assets/images/favicon.svg" type="image/x-icon"> <!-- [Google Font] Family -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" id="main-font-link">
 <!-- [Tabler Icons] https://tablericons.com -->
 <link rel="stylesheet" href="../assets/fonts/tabler-icons.min.css" >
@@ -73,15 +72,6 @@ if(isset($_POST['login']))
 <!-- [Template CSS Files] -->
 <link rel="stylesheet" href="../assets/css/style.css" id="main-style-link" >
 <link rel="stylesheet" href="../assets/css/style-preset.css" >
-
-
-<!-- Required library -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<!-- Bootstrap theme -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<!-- reCAPTCHA v3 js -->
-<script src="https://www.google.com/recaptcha/api.js?render=6Lf0Z50iAAAAAJyJqo7OBP8T9gRGE4knMPZqryvv"></script>
 
 </head>
 <!-- [Head] end -->
@@ -116,7 +106,7 @@ if(isset($_POST['login']))
             </div>
             
 
-            <form method="POST" action="" autocomplete= "off" id="login_form">
+            <form method="POST" action="" autocomplete= "off">
             
             <div class="form-group mb-3">
               <label class="form-label">Email or Username</label>
@@ -133,37 +123,8 @@ if(isset($_POST['login']))
             </div>
 
             <div class="d-grid mt-4">
-              <button type="submit" onclick="login()" class="btn btn-primary" name="login">Login</button>
+              <button type="submit" class="btn btn-primary" name="login" onclick="login()">Login</button>
             </div>
-
-
-      
-			<!-- <div class="saprator mt-3">
-              <span>Login with</span>
-            </div> -->
-            <!-- <div class="row">
-              <div class="col-4">
-                <div class="d-grid">
-                  <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
-                    <img src="https://themewagon.github.io/Mantis-Bootstrap/assets/images/authentication/google.svg" alt="img"> <span class="d-none d-sm-inline-block"> Google</span>
-                  </button>
-                </div>
-              </div>
-              <div class="col-4">
-                <div class="d-grid">
-                  <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
-                    <img src="https://themewagon.github.io/Mantis-Bootstrap/assets/images/authentication/twitter.svg" alt="img"> <span class="d-none d-sm-inline-block"> Twitter</span>
-                  </button>
-                </div>
-              </div>
-              <div class="col-4">
-                <div class="d-grid">
-                  <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
-                    <img src="https://themewagon.github.io/Mantis-Bootstrap/assets/images/authentication/facebook.svg" alt="img"> <span class="d-none d-sm-inline-block"> Facebook</span>
-                  </button>
-                </div>
-              </div>
-            </div> -->
           
 			
           </div>
@@ -188,6 +149,7 @@ if(isset($_POST['login']))
     </div>
   </div>
   <!-- [ Main Content ] end -->
+
   <!-- Required Js -->
   <script src="../assets/js/plugins/popper.min.js"></script>
   <script src="../assets/js/plugins/simplebar.min.js"></script>
@@ -217,44 +179,8 @@ if(isset($_POST['login']))
   
   <script>font_change("Public-Sans");</script>
   
-  
+    
 
-  <script>
-  function login() {
-    grecaptcha.ready(function() {
-      grecaptcha.execute('6Lf0Z50iAAAAAJyJqo7OBP8T9gRGE4knMPZqryvv', {
-        action: 'submit'
-      }).then(function(token) {
-        // Add your logic to submit to your backend server here.
-        var email = $("#email").val();
-        var password = $("#password").val();
-        console.log(email);
-        console.log(password);
-        console.log(token);
-        $.ajax({
-          url: "login_check.php",
-          type: "POST",
-          dataType: 'json',
-          data: {
-            email: email,
-            password: password,
-            token: token
-          },
-          success: function(response) {
-            if (response.status == true) {
-              alert(response.msg);
-            } else {
-              alert(response.msg);
-            }
-          },
-          error: function(xhr, status) {
-            console.log('ajax error = ' + xhr.statusText);
-          }
-        });
-      });
-    });
-  }
-</script>
 </body>
 <!-- [Body] end -->
 
