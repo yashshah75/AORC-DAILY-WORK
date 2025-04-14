@@ -19,9 +19,7 @@ if(isset($_POST['login']))
       $captcharandom = $_REQUEST['captcha_rand'];
 
       if ($captcha !=  $captcharandom) {
-        echo "<script>alert('Invalid captcha')</script>";
-        
-        
+        echo "<script>alert('Invalid captcha')</script>"; 
       }
       else
       {
