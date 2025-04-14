@@ -1,51 +1,66 @@
-<?php 
+<?php
   session_start();
   include("database/db.php"); // include database connection
+  $random = rand(1000, 9999);
+  $_SESSION['captcha'] = $random;
 ?>
-
+ 
 <?php
-
+ 
 if(isset($_POST['login']))
-      {
-        $username = trim($_POST['email']);
-        $password = trim($_POST['password']);
+  {
+    $username = trim($_POST['email']);
+    $password = trim($_POST['password']);
+
+    $query = "SELECT password FROM register WHERE username = ? OR email = ?";
+    
+    if(isset($_REQUEST['login'])){
+      $captcha = $_REQUEST['captcha'];
+      $captcharandom = $_REQUEST['captcha_rand'];
+
+      if ($captcha !=  $captcharandom) {
+        echo "<script>alert('Invalid captcha')</script>";
         
-        $query = "SELECT password FROM register WHERE username = ? OR email = ?";        
+        
+      }
+      else
+      {
         $stmt = mysqli_prepare($conn, $query);
         mysqli_stmt_bind_param($stmt, "ss", $username, $username);
         // mysqli_stmt_bind_param($stmt, "ss", $username, $username);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
-
+      
         if($row = mysqli_fetch_assoc($result))
         {
           $hashed_password = $row['password'];
-          
+        
           if (password_verify($password, $hashed_password)) {
             $_SESSION['user_name'] = $username;
             header('Location: index.php');
             exit(); // Ensure script stops execution after redirection
-        }
-        else
+          }
+          else
           {
             echo "<h4 style='color:red;'>Incorrect Password</h4>";
           }
         }
-      else
+        else
         {
           echo "<h4 style='color:red;'>User Not Found</h4>";
         }
       }
-  
-?>
-
-
-
+    }
+  }
+        
+      ?>
+ 
+ 
 <!DOCTYPE html>
 <html lang="en">
 <!-- [Head] start -->
-
-
+ 
+ 
 <!-- Mirrored from themewagon.github.io/Mantis-Bootstrap/pages/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 20 Mar 2025 06:40:49 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
@@ -57,7 +72,7 @@ if(isset($_POST['login']))
   <meta name="description" content="Mantis is made using Bootstrap 5 design framework. Download the free admin template & use it for your project.">
   <meta name="keywords" content="Mantis, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Bootstrap Admin Template">
   <meta name="author" content="CodedThemes">
-
+ 
   <!-- [Favicon] icon -->
   <link rel="icon" href="https://themewagon.github.io/Mantis-Bootstrap/assets/images/favicon.svg" type="image/x-icon"> <!-- [Google Font] Family -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" id="main-font-link">
@@ -72,11 +87,25 @@ if(isset($_POST['login']))
 <!-- [Template CSS Files] -->
 <link rel="stylesheet" href="../assets/css/style.css" id="main-style-link" >
 <link rel="stylesheet" href="../assets/css/style-preset.css" >
-
+ 
+<script src="https://www.google.com/recaptcha/api.js?render=6Lee9BUrAAAAAInY31Ba8PEpZ1vedCuWARp-zw6v"></script>
+ 
+ 
+ 
+<style>
+  .captcha
+  {
+    width:50%;
+    background-color: Yellow;
+    text-align:center;
+    font-size:24px;
+    font-weight:  700;
+  }
+</style>
 </head>
 <!-- [Head] end -->
 <!-- [Body] Start -->
-
+ 
 <body>
   <!-- [ Pre-loader ] start -->
   <div class="loader-bg">
@@ -85,53 +114,77 @@ if(isset($_POST['login']))
     </div>
   </div>
   <!-- [ Pre-loader ] End -->
-
-
-
+ 
+ 
+ 
   <div class="auth-main">
     <div class="auth-wrapper v3">
       <div class="auth-form">
         <div class="auth-header">
-
-
+ 
+ 
           <a href="#"><img src="https://themewagon.github.io/Mantis-Bootstrap/assets/images/logo-dark.svg" alt="img"></a>
         </div>
  
         <div class="card my-5">
           <div class="card-body">
-
+ 
             <div class="d-flex justify-content-between align-items-end mb-4">
               <h3 class="mb-0"><b>Login</b></h3>
               <a href="register.php" class="link-primary">Don't have an account?</a>
             </div>
-            
-
+           
+ 
             <form method="POST" action="" autocomplete= "off">
-            
+           
             <div class="form-group mb-3">
               <label class="form-label">Email or Username</label>
               <input type="text" class="form-control" placeholder="Enter your User name or Email" name="email" id="email" required>
             </div>
-
+ 
             <div class="form-group mb-3">
               <label class="form-label">Password</label>
               <input type="password" class="form-control" placeholder="Password" name="password" id="password" required>
             </div>
-
+           
+            <!-- <div class="form-group mb-3 col-md-6">
+              <label class="form-label" for="captcha">Captcha</label>
+              <input type="text" name="captcha" placeholder="Enter Captcha"  class="form-control">
+            </div>
+ 
+            <div class="form-group mb-3 col-md-6">
+              <label class="form-label" for="captcha-code" >Captcha code</label>
+              <input type="hidden" name="captcha-rand" value="<?php echo $random;?>">
+            </div> -->
+ 
+            <div class="form-group mb-3 col-md-6">
+  <label class="form-label" for="captcha">Captcha</label>
+  <input type="text" name="captcha" placeholder="Enter Captcha" class="form-control" required>
+</div>
+ 
+<div class="form-group mb-3 col-md-6">
+  <label class="form-label">Captcha code</label>
+  <div class="captcha"><?php echo $random; ?></div>
+  <input type="hidden" name="captcha_rand" value="<?php echo $random; ?>">
+</div>
+ 
+ 
             <div class="d-flex mt-1 justify-content-between">
               <a href="forgotpass.php">Forgot Password?</a>
-            </div>
-
+            </div>  
+ 
             <div class="d-grid mt-4">
-              <button type="submit" class="btn btn-primary" name="login" onclick="login()">Login</button>
+              <!-- <button type="submit" class="btn btn-primary" name="login" onclick="login()">Login</button> -->
+              <button type="submit" class="btn btn-primary" name="login">Login</button>
+ 
             </div>
-          
-			
+         
+     
           </div>
-
+ 
         </div>
         </form>
-		<div class="auth-footer row">
+    <div class="auth-footer row">
           <!-- <div class=""> -->
             <div class="col my-1">
               <p class="m-0">Copyright © <a href="#">YASH SHAH</a> Distributed by <a href="https://themewagon.com/">ThemeWagon</a></p>
@@ -149,7 +202,7 @@ if(isset($_POST['login']))
     </div>
   </div>
   <!-- [ Main Content ] end -->
-
+ 
   <!-- Required Js -->
   <script src="../assets/js/plugins/popper.min.js"></script>
   <script src="../assets/js/plugins/simplebar.min.js"></script>
@@ -157,37 +210,33 @@ if(isset($_POST['login']))
   <script src="../assets/js/fonts/custom-font.js"></script>
   <script src="../assets/js/pcoded.js"></script>
   <script src="../assets/js/plugins/feather.min.js"></script>
-
-  
-  
-  
-  
+ 
+ 
+ 
+ 
+ 
   <script>layout_change('light');</script>
-  
-  
-  
-  
+ 
+ 
+ 
+ 
   <script>change_box_container('false');</script>
-  
-  
-  
+ 
+ 
+ 
   <script>layout_rtl_change('false');</script>
-  
-  
+ 
+ 
   <script>preset_change("preset-1");</script>
-  
-  
+ 
+ 
   <script>font_change("Public-Sans");</script>
-  
-    
-
+ 
+ 
+ 
 </body>
 <!-- [Body] end -->
-
-
+ 
 <!-- Mirrored from themewagon.github.io/Mantis-Bootstrap/pages/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 20 Mar 2025 06:40:54 GMT -->
 </html>
-
-
-
-
+ 
