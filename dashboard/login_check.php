@@ -20,7 +20,7 @@ if($arrResponse["success"] == '1' && $arrResponse["score"] >= 0.5) {
     // demo purpose
 	
 	include "database/db.php";
-	$query = "select * from users_master where email='".$email."' and password='".$password."' ";
+	$query = "select * from register where email='".$email."' and password='".$password."' ";
 	$result = mysqli_query($con,$query);
 	$rowcount=mysqli_num_rows($result);
 	if($rowcount>=1)
