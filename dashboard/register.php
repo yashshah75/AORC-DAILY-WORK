@@ -8,7 +8,7 @@
     // if(isset($_POST[login()]))
     // {
  
-    $allowed_extensions = ['jpg', 'jpeg', 'png'];
+      $allowed_extensions = ['jpg', 'jpeg', 'png'];
  
       // Get the file name and extension
       $filename = $_FILES["photo"]["name"];
