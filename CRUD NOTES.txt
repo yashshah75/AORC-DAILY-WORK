@@ -60,6 +60,6 @@ updated at
 ======================
 -> Today, I have done Captcha in login & Register Page
 -> Watch video till 23, in these video i learned about: How to use Calendar, 
-Category & Post(Display Recent Posts) Widgets, logo, Site-icon(fav-icon), Tagline & Title of site, 
+Category & Post(Display Recent Posts) Widgets, logo, Site-icon(fav-icon), Tagline & Title of site
 
 
