@@ -95,6 +95,7 @@
     $stmt->close();
     $captcha = $_REQUEST['captcha'];
     $captcharandom = $_REQUEST['captcha-rand'];
+    
     if($captcha == $captcharandom){
     // Insert user into the database
     $sql = "INSERT INTO register (photo, username, email, password, confirm_password, mobile) VALUES (?,?,?,?,?,?)";
