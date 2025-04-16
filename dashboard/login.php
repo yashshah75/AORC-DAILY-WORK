@@ -165,8 +165,7 @@ if(isset($_POST['login']))
   <div class="captcha"><?php echo $random; ?></div>
   <input type="hidden" name="captcha_rand" value="<?php echo $random; ?>">
 </div>
- 
- 
+
             <div class="d-flex mt-1 justify-content-between">
               <a href="forgotpass.php">Forgot Password?</a>
             </div>  
@@ -176,8 +175,7 @@ if(isset($_POST['login']))
               <button type="submit" class="btn btn-primary" name="login">Login</button>
  
             </div>
-         
-     
+           
           </div>
  
         </div>
